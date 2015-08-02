@@ -11,8 +11,10 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -40,7 +42,7 @@ public class Login extends Activity implements OnClickListener{
     // private static final String LOGIN_URL = "http://xxx.xxx.x.x:1234/webservice/login.php";
 
     //testing on Emulator:
-    private static final String LOGIN_URL = "http://10.0.0.2:1234/webservice/login.php";
+    private static final String LOGIN_URL = "http://kasia.lukiewicz.com/login.php";
 
     //testing from a real server:
     //private static final String LOGIN_URL = "http://www.yourdomain.com/webservice/login.php";
@@ -48,6 +50,7 @@ public class Login extends Activity implements OnClickListener{
     //JSON element ids from repsonse of php script:
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
+    private static final String TAG_USER_ID = "userId";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,12 +110,14 @@ public class Login extends Activity implements OnClickListener{
         protected String doInBackground(String... args) {
             // TODO Auto-generated method stub
             // Check for success tag
-            int success;
+            int success, userid;
             String username = user.getText().toString();
             String password = pass.getText().toString();
+
             try {
                 // Building Parameters
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
+
                 params.add(new BasicNameValuePair("username", username));
                 params.add(new BasicNameValuePair("password", password));
 
@@ -124,18 +129,52 @@ public class Login extends Activity implements OnClickListener{
                 // check your log for json response
                 Log.d("Login attempt", json.toString());
 
-                // json success tag
+                // Async json success tag
                 success = json.getInt(TAG_SUCCESS);
                 if (success == 1) {
                     Log.d("Login Successful!", json.toString());
-                    Toast.makeText(Login.this, success, Toast.LENGTH_LONG).show();
+                    // save user data
+                    /*SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(Login.this);
+                    SharedPreferences.Editor edit = sp.edit();
+                    edit.putString("username", username);
+                    edit.commit();*/
+
+                    userid = json.getInt(TAG_USER_ID);
+                    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(Login.this);
+                    SharedPreferences.Editor editid = sp.edit();
+                    editid.putInt("userID",userid);
+                    editid.commit();
+
+                    Intent i = new Intent(Login.this, MainMenu.class);
+                    finish();
+                    startActivity(i);
+                    return json.getString(TAG_MESSAGE);
+                } else {
+                    Log.d("Login Failure!", json.getString(TAG_MESSAGE));
+                    return json.getString(TAG_MESSAGE);
+                }
+
+
+/*
+                // json success tag
+                success = json.getInt(TAG_SUCCESS);
+                if (success == 1) {
+                   Log.d("Login Successful!", json.toString());
+                    //Toast.makeText(Login.this, success, Toast.LENGTH_LONG).show();
+                    return json.getString(TAG_MESSAGE);
+                    Log.d("Login Successful!", json.toString());
+                    Intent i = new Intent(Login.this, ReadComments.class);
+                    finish();
+                    startActivity(i);
                     return json.getString(TAG_MESSAGE);
                 }else{
                     Log.d("Login Failure!", json.getString(TAG_MESSAGE));
                     return json.getString(TAG_MESSAGE);
 
                 }
+                */
             } catch (JSONException e) {
+                Log.e("JSON Parser", "Error parsing data " + e.toString());
                 e.printStackTrace();
             }
 

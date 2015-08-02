@@ -1,69 +1,144 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2A8E82"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.kasiek.mysqltest.RegisterActivity">
 
-    <ImageView
-        android:id="@+id/imageView1"
+    <!--<TextView
+        android:id="@+id/title_registration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:src="@mipmap/ic_launcher" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/password"
-        android:layout_centerVertical="true"
-        android:text="Username" />
-
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:ems="10" />
-
-    <TextView
-        android:id="@+id/TextView01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/username"
-        android:layout_below="@+id/username"
-        android:text="Password" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="Android Remote Server Tutorial"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Panel rejestracji"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textStyle="bold" />
+        android:textColor="#ffffff"
+        android:textStyle="bold|italic" />
+    -->
 
-    <EditText
-        android:id="@+id/password"
+    <LinearLayout
+        android:id="@+id/registration_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/TextView01"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:inputType="textPassword" />
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/registration_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="15"
+            android:hint="Imię"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff" />
+
+        <EditText
+            android:id="@+id/registration_surname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="15"
+            android:hint="Nazwisko"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/radioSex"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp"
+            android:editable="false"
+            android:ems="15"
+            android:paddingLeft="5dp"
+            android:text="Płeć"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff" />
+
+        <RadioGroup
+            android:id="@+id/registration_radioSex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/registration_radioFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:buttonTint="#ffffff"
+                android:checked="true"
+                android:text="Kobieta"
+                android:textColor="#ffffff" />
+
+            <RadioButton
+                android:id="@+id/registration_radioMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#ffffff"
+                android:text="Mężczyzna"
+                android:textColor="#ffffff" />
+
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/data_of_birth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/registration_radioSex"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:editable="false"
+            android:ems="15"
+            android:hint="Data urodzenia"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff" />
+
+        <EditText
+            android:id="@+id/registration_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="15"
+            android:hint="Nazwa użytkownika"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff" />
+
+
+        <EditText
+            android:id="@+id/registration_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/registration_username"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:ems="15"
+            android:hint="Hasło"
+            android:inputType="textPassword"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff" />
+
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/register"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/password"
-        android:layout_below="@+id/password"
-        android:text="Register" />
+        android:layout_alignLeft="@+id/registration_data"
+        android:layout_alignRight="@+id/registration_data"
+        android:layout_below="@+id/registration_data"
+        android:layout_marginTop="30dp"
+        android:background="#55A59B"
+        android:text="Zarejestruj"
+        android:textColor="#ffffff" />
 </RelativeLayout>

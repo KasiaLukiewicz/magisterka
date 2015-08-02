@@ -62,7 +62,7 @@ public class JSONParser {
         try {
             // Create a BufferedReader to parse through the inputStream.
             BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    is, "iso-8859-1"), 8);
+                    is, "iso-8859-2"), 8);
             // Declare a string builder to help with the parsing.
             StringBuilder sb = new StringBuilder();
             // Declare a string to store the JSON object data in string form.
@@ -104,6 +104,7 @@ public class JSONParser {
 
             // check for request method
             if(method == "POST"){
+
                 // request method is POST
                 // defaultHttpClient
                 DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -124,28 +125,27 @@ public class JSONParser {
                 HttpResponse httpResponse = httpClient.execute(httpGet);
                 HttpEntity httpEntity = httpResponse.getEntity();
                 is = httpEntity.getContent();
+
             }
 
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    is, "iso-8859-1"), 8);
+            //InputStreamReader nowazmienna=new InputStreamReader(is, "iso-8859-1");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"), 8);
             StringBuilder sb = new StringBuilder();
             String line = null;
             while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
             }
             is.close();
-            json = sb.toString();
+            //json = sb.toString();
+            json = new String(sb.toString().getBytes("UTF-8"));
         } catch (Exception e) {
-            Log.e("Buffer Error", "Error converting result " + e.toString());
+            Log.e("Buffer Error", "Error converting result ", e);
+            //Log.e("Buffer Error", "Error converting result " + e.toString());
         }
 
         // try parse the string to a JSON object

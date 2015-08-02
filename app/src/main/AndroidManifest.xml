@@ -3,41 +3,77 @@
     package="com.example.kasiek.mysqltest" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="11"
         android:targetSdkVersion="17" />
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <android:uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/docto70"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".Login"
-            android:label="@string/app_name" >
+            android:label="Logowanie" >
+        </activity>
+        <activity
+            android:name=".Register"
+            android:label="Rejestracja">
+        </activity>
+        <activity
+            android:name=".MainMenu"
+            android:label="MainMenu" >
+        </activity>
+        <activity
+            android:name=".MedicalVisit"
+            android:label="MedicalVisit" >
+        </activity>
+        <activity
+            android:name=".Drugs"
+            android:label="Drugs" >
+        </activity>
+        <activity
+            android:name=".AddMedicalVisit"
+            android:label="AddComment" >
+        </activity>
+        <activity
+            android:name=".EditPatientCard"
+            android:label="EditPatientCard" >
+        </activity>
+        <activity
+            android:name=".ReminderVisit"
+            android:label="ReminderVisit">
+        </activity>
+        <activity
+            android:name=".BodyConversion"
+            android:label="BodyConversion">
+        </activity>
+        <activity
+            android:name=".CalendarView"
+            android:label="CalendarView">
+        </activity>
+        <activity
+            android:name=".EditProfile"
+            android:label="EditProfile">
+        </activity>
+        <activity
+            android:name=".WelcomScreen"
+            android:label="Książeczka Zdrowia">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Register"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name=".RegisterActivity"
-            android:label="@string/title_activity_register" >
-        </activity>
+        <receiver
+            android:name="com.example.kasiek.mysqltest.AlarmReceiver"
+            />
     </application>
 
 </manifest>
